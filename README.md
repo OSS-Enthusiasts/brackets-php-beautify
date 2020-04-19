@@ -10,6 +10,28 @@ Simple install-and-use code formatter (beautifier) PHP in Brackets that works ri
 - No extra configuration need, 
 - No need to set location for PHP Binary
 
+**BEFORE**
+```
+<?php
+for($i = 0; $i < 10; $i++)
+{
+if($i%2==0)
+{
+echo "Flipflop";  
+}
+}
+```
+**AFTER**
+```
+<?php
+for ( $i = 0; $i < 10; $i++ ) {
+    if ( $i%2 == 0 ) {
+        echo 'Flipflop';
+
+    }
+}
+```
+
 This is an adaptation of [php-formatter](https://github.com/chuaple/php-formatter) by [@chuaple](https://github.com/chuaple)
 
 
