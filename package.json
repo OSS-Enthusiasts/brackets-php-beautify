@@ -2,7 +2,7 @@
   "name": "brackets-php-beautify",
   "version": "0.1.0",
   "title": "Brackets PHP-Beautify",
-  "homepage": "",
+  "homepage": "https://github.com/nadchif/brackets-php-beautify",
   "description": "Simple install-and-use code formatter (beautifier) PHP in Brackets. No extra configuration need, no PHP required",
   "main": "main.js",
   "scripts": {
