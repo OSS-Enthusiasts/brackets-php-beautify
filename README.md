@@ -10,6 +10,8 @@ Simple install-and-use code formatter (beautifier) PHP in Brackets that works ri
 - No extra configuration need, 
 - No need to set location for PHP Binary
 
+![Brackets Context Menu](https://raw.githubusercontent.com/nadchif/brackets-php-beautify/master/screenshots/contextmenu.png)
+
 **BEFORE**
 ```
 <?php
@@ -40,4 +42,4 @@ This is an adaptation of [php-formatter](https://github.com/chuaple/php-formatte
 GPL-3.0
 
 ## Contributions
-Contributions and suggestions are very welcome and wanted. I try to respond to pull requests within 48 hours. For more information see [CONTRIBUTING.md](https://github.com/nadchif/adobe-brackets-encode-decode/blob/master/CONTRIBUTING.md).
+Contributions and suggestions are very welcome and wanted. I try to respond to pull requests within 48 hours. For more information see [CONTRIBUTING.md](https://github.com/nadchif/brackets-php-beautify/blob/master/CONTRIBUTING.md).
