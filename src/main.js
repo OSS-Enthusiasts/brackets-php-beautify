@@ -12,7 +12,7 @@
 define(function(require, exports, module) {
   'use strict';
 
-  const phpFormatter = require('lib/php').formatter;
+  const phpFormatter = require('thirdparty/php').formatter;
 
   const CommandManager = brackets.getModule('command/CommandManager');
   const EditorManager = brackets.getModule('editor/EditorManager');
