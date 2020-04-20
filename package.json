@@ -15,6 +15,8 @@
     "brackets",
     "php",
     "beautifier",
+    "beautify",
+    "tidy",
     "format"
   ],
   "author": "nadchif",
