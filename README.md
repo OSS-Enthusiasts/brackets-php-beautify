@@ -4,7 +4,7 @@ Brackets Easy PHP Format
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
-[![first-timers-only](https://img.shields.io/badge/first--timers--only-friendly-blue.svg?style=flat-square)](https://www.firsttimersonly.com/)
+![Node CI Tests](https://github.com/nadchif/brackets-php-beautify/workflows/Node%20CI%20Tests/badge.svg) [![first-timers-only](https://img.shields.io/badge/first--timers--only-friendly-blue.svg?style=flat-square)](https://www.firsttimersonly.com/)
 
 Simple install-and-use code formatter (beautifier) PHP in Brackets that works right out the box. 
 - No extra configuration need, 
