@@ -1,4 +1,4 @@
-Brackets Easy PHP Format
+Brackets PHP Beautify
 =========
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
