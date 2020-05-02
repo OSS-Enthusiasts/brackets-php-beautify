@@ -1,0 +1,10 @@
+{
+    "Style": "GNU",
+    "Indent": "Space",
+    "Remove_all_comments": true,
+    "Remove_empty_lines": true,
+    "Make_long_opening_tag": true,
+    "Space_inside_brackets": true,
+    "Space_inside_blocks": true,
+    "Space_around_operators": true,
+}
