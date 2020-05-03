@@ -7,10 +7,16 @@
  */
 
 define(function(require, exports) {
-    /*
+  /* ------------------------------------------------------
     * CODE FOR getting formatting options from phpbeautifyrc.json
-    * And then perform beautyfication a/c to the options
+
+  const fs = require('fs');
+  const rawdata = fs.readFileSync('phpbeautifyrc.json');
+  const data = JSON.parse(rawdata);
+  console.log(data);
+    * ---------------------------------------------------------
     */
+
   const format = (code) => {
     let leval = 0;
     const indentSnippets = (code) => {
