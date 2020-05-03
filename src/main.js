@@ -22,8 +22,9 @@ define(function(require, exports, module) {
     const editor = EditorManager.getFocusedEditor();
     if (editor) {
       const unformatted = editor.document.getText();
-      const formatted = phpFormatter(unformatted);
-      editor.document.setText(formatted);
+      phpFormatter(unformatted, editor.document);
+      // const formatted = phpFormatter(unformatted, editor.document);
+      // editor.document.setText(formatted);
     }
   };
 

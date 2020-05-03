@@ -15,9 +15,58 @@ define(function(require, exports) {
   const data = JSON.parse(rawdata);
   console.log(data);
     * ---------------------------------------------------------
-    */
 
-  const format = (code) => {
+    Suggested implementation:
+    Let's use Brackets APIs as much as possible ;-)
+
+    See more below:
+   */
+
+  const Dialogs = brackets.getModule('widgets/Dialogs');
+
+  const getCustomConfigFile = () => {
+    return new Promise((resolve, reject) => {
+      try {
+        const ProjectManager = brackets.getModule('project/ProjectManager');
+        // Get the user's working project directory
+        const projectDirectory = ProjectManager.getProjectRoot();
+        projectDirectory.getContents((err, files) => {
+          if (err) {
+            reject(err);
+          }
+          const matchingFile = files.find((file) => {
+            return (file.fullPath.toLowerCase().endsWith('/.phpbeautifyrc.json'));
+          });
+          if (!matchingFile) {
+            console.warn('No .phpbeautifyrc.json file found in project directory. Default options will be used');
+            reject(Error('No .phpbeautifyrc.json file found'));
+          }
+          matchingFile.read((err, rawdata) => {
+            if (err) {
+              reject(err);
+            }
+            try {
+              const data = JSON.parse(rawdata);
+              resolve(data);
+            } catch (e) {
+              // notify the user that the .phpbeautifyrc.json is corrupt or unreadable
+              Dialogs.showModalDialog('',
+                  'PHP Beautify Configuration Error',
+                  `${matchingFile.fullPath} could not be parsed!`);
+              reject(e);
+            }
+          });
+        });
+      } catch (e) {
+        reject(e);
+      }
+    });
+  };
+
+  const format = (code, customConfiguration) => {
+    // use custom configuration here. if there was none found, customConfiguration will still be null
+    console.log('Using the following configuration', customConfiguration);
+
     let leval = 0;
     const indentSnippets = (code) => {
       code = code.trim();
@@ -58,7 +107,22 @@ define(function(require, exports) {
           (((content = contents.shift()), q === '"' && content.match(/[\$\n']/g) ? `"${content}"` : `'${content}'`)));
   };
 
-  exports.formatter = (code) => {
-    return code.startsWith('\<?php') ? format(code) : code;
+  const formatWithOptions = (code, document) => {
+    getCustomConfigFile().
+        then((customConfiguration) => {
+          const formattedWithOptions = format(code, customConfiguration);
+          document.setText(formattedWithOptions);
+        })
+        .catch((error) => {
+          console.error(error);
+          const formatted = format(code, null);
+          document.setText(formatted);
+        });
+  };
+
+  exports.formatter = (code, document) => {
+    if (code.trim().substr(0, 6).toLocaleLowerCase().startsWith('\<?php')) {
+      formatWithOptions(code, document);
+    }
   };
 });
