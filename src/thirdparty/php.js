@@ -66,7 +66,15 @@ define(function(require, exports) {
   const format = (code, customConfiguration) => {
     // use custom configuration here. if there was none found, customConfiguration will still be null
     console.log('Using the following configuration', customConfiguration);
-
+      
+      // Code to read the preferences from the promise object, and store them in variable.
+      
+      
+      /*
+        example code:
+            if remove_all_comments == true
+                code.replace(  regex( /*....*/), '' )
+      */
     let leval = 0;
     const indentSnippets = (code) => {
       code = code.trim();
