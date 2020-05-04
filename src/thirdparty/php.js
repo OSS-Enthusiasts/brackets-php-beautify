@@ -7,20 +7,6 @@
  */
 
 define(function(require, exports) {
-  /* ------------------------------------------------------
-    * CODE FOR getting formatting options from phpbeautifyrc.json
-
-  const fs = require('fs');
-  const rawdata = fs.readFileSync('phpbeautifyrc.json');
-  const data = JSON.parse(rawdata);
-  console.log(data);
-    * ---------------------------------------------------------
-
-    Suggested implementation:
-    Let's use Brackets APIs as much as possible ;-)
-
-    See more below:
-   */
 
   const Dialogs = brackets.getModule('widgets/Dialogs');
 
@@ -66,6 +52,8 @@ define(function(require, exports) {
   const format = (code, customConfiguration) => {
     // use custom configuration here. if there was none found, customConfiguration will still be null
     console.log('Using the following configuration', customConfiguration);
+    
+    // TODO: Implement using the configuration options from the customConfiguration Object when formatting code below
 
     let leval = 0;
     const indentSnippets = (code) => {
