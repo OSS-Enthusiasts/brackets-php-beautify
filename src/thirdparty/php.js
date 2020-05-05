@@ -52,21 +52,6 @@ define(function(require, exports) {
     // use custom configuration here. if there was none found, customConfiguration will still be null
     console.log('Using the following configuration', customConfiguration);
 
-    // TODO: Implement using the configuration options from the customConfiguration Object when formatting code below
-    // -----------------------------------my code--------------------------------------
-
-    // 3. Remove all comments:
-    if (customConfiguration.Remove_all_comments == true) {
-      console.log('replacing the comments');
-
-      return code
-          .replace(/'[^']*'|"[^"]*"|((?:#|\/\/).*$)/gm, '')
-          .replace(/^\s*\/\*\*?[^!][.\s\t\S\n\r]*?\*\//gm, '');
-      ;
-    }
-
-    // -------------------------------------my code ends-------------------------------
-
     let leval = 0;
     const indentSnippets = (code) => {
       code = code.trim();
@@ -76,33 +61,41 @@ define(function(require, exports) {
       if ('{(['.includes(code.charAt(code.length - 1)) && !comment) leval++;
       return code;
     };
+
+    // TODO: Implement using the configuration options from the customConfiguration Object when formatting code below
+    let formattedCode = code;
+
+    if (customConfiguration.Style == "GNU") {
+      // DO WHAT?
+    }
+
+    if (customConfiguration.Remove_all_comments == true) {
+      formattedCode = formattedCode
+          .replace(/'[^']*'|((?:#|\/\/).*$)/gm, '')
+          .replace(/^\s*\/\*\*?[^!][.\s\t\S\n\r]*?\*\//gm, '');
+    }
+    if (customConfiguration.Remove_empty_lines == true) {
+      formattedCode = formattedCode
+          .replace(/^\s*/gm, '');
+    }
+    if (customConfiguration.Space_inside_brackets == true) {
+      formattedCode = formattedCode
+          .replace(/(\() */g, '$1 ')
+          .replace(/ *(\))/g, ' $1');
+    }
+    if (customConfiguration.Space_inside_blocks == true) {
+      formattedCode = formattedCode
+          .replace(/(\{) */g, '$1 ')
+          .replace(/ *(\})/g, ' $1')
+          .split(/\r?\n/).map(indentSnippets).join('\n');
+    }
+    if (customConfiguration.Space_around_operators == true) {
+      // NEED HELP REGARDING THE REGEX
+    }
+
     const contents = [];
-    return code
+    return formattedCode
         .replace(/(['"])([\s\S]*?)(\1)/g, (_exp, q, content) => ((contents.push(content), `${q}quotestring${q}`)))
-
-        .replace(/ ?([\+\-\*\/\.\?!><]?={1,3})(?!\>) ?/g, ' $1 ') // `=` [>1]
-        .replace(/ ?([\&\|]{2}) ?/g, ' $1 ') // `&&` `||` [>1]
-        .replace(/ *(,) ?(?!\n)/g, '$1 ') // `,` [0, >1]
-        .replace(/\n* *(\{)/g, ' $1') // before `{` [1]
-
-        .replace(/(\() */g, '$1 ') // after  `(` [1]
-        .replace(/ *(\))/g, ' $1') // before `)` [1]
-        .replace(/\(\s*\)/g, '()') // `()`
-
-        .replace(/(if|for|each)\s*\(/g, '$1 (') // after `if` `for` and `each`
-
-        .replace(/([\{\}])(.)/g, '$1\n$2') // after `{` `}` [LF]
-        .replace(/\}\s*(else|catch)/g, '} $1') // after  `else` except
-        .replace(/(else|catch)\s*\{/g, '$1 {') // before `else` except
-
-        .replace(/[；;](.)/g, ';\n$1') // after `;` [LF]
-        .replace(/for \([\s\S]*?\)/g, (exp) => exp.replace(/;\s+/g, '; ')) // `for` except
-
-        .split(/\r?\n/).map(indentSnippets).join('\n') // 设置缩进
-
-        .replace(/([^\{])\n+( *(public |private )?(function |class ))/g, '$1\n\n$2') // 函数/类前添加空行
-        .replace(/(\n{2,})/g, '\n\n') // 去除多余空行
-
         .replace(/(['"]).*?(\1)/g, (_exp, q, content) =>
           (((content = contents.shift()), q === '"' && content.match(/[\$\n']/g) ? `"${content}"` : `'${content}'`)));
   };
