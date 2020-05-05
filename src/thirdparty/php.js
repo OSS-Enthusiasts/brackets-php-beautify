@@ -7,7 +7,6 @@
  */
 
 define(function(require, exports) {
-
   const Dialogs = brackets.getModule('widgets/Dialogs');
 
   const getCustomConfigFile = () => {
@@ -52,8 +51,21 @@ define(function(require, exports) {
   const format = (code, customConfiguration) => {
     // use custom configuration here. if there was none found, customConfiguration will still be null
     console.log('Using the following configuration', customConfiguration);
-    
+
     // TODO: Implement using the configuration options from the customConfiguration Object when formatting code below
+    // -----------------------------------my code--------------------------------------
+
+    // 3. Remove all comments:
+    if (customConfiguration.Remove_all_comments == true) {
+      console.log('replacing the comments');
+
+      return code
+          .replace(/'[^']*'|"[^"]*"|((?:#|\/\/).*$)/gm, '')
+          .replace(/^\s*\/\*\*?[^!][.\s\t\S\n\r]*?\*\//gm, '');
+      ;
+    }
+
+    // -------------------------------------my code ends-------------------------------
 
     let leval = 0;
     const indentSnippets = (code) => {
