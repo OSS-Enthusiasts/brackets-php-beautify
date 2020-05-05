@@ -51,6 +51,7 @@ define(function(require, exports) {
   const format = (code, customConfiguration) => {
     // use custom configuration here. if there was none found, customConfiguration will still be null
     console.log('Using the following configuration', customConfiguration);
+    // TODO: Implement using the configuration options from the customConfiguration Object when formatting code below
 
     let leval = 0;
     const indentSnippets = (code) => {
@@ -61,41 +62,36 @@ define(function(require, exports) {
       if ('{(['.includes(code.charAt(code.length - 1)) && !comment) leval++;
       return code;
     };
-
-    // TODO: Implement using the configuration options from the customConfiguration Object when formatting code below
-    let formattedCode = code;
-
-    if (customConfiguration.Style == "GNU") {
-      // DO WHAT?
-    }
-
-    if (customConfiguration.Remove_all_comments == true) {
-      formattedCode = formattedCode
-          .replace(/'[^']*'|((?:#|\/\/).*$)/gm, '')
-          .replace(/^\s*\/\*\*?[^!][.\s\t\S\n\r]*?\*\//gm, '');
-    }
-    if (customConfiguration.Remove_empty_lines == true) {
-      formattedCode = formattedCode
-          .replace(/^\s*/gm, '');
-    }
-    if (customConfiguration.Space_inside_brackets == true) {
-      formattedCode = formattedCode
-          .replace(/(\() */g, '$1 ')
-          .replace(/ *(\))/g, ' $1');
-    }
-    if (customConfiguration.Space_inside_blocks == true) {
-      formattedCode = formattedCode
-          .replace(/(\{) */g, '$1 ')
-          .replace(/ *(\})/g, ' $1')
-          .split(/\r?\n/).map(indentSnippets).join('\n');
-    }
-    if (customConfiguration.Space_around_operators == true) {
-      // NEED HELP REGARDING THE REGEX
-    }
-
     const contents = [];
+    let formattedCode = code
+        .replace(/(['"])([\s\S]*?)(\1)/g, (_exp, q, content) => ((contents.push(content), `${q}quotestring${q}`)));
+
+    if (customConfiguration != null) {
+      if (customConfiguration.Remove_all_comments == true) {
+        formattedCode = formattedCode
+            .replace(/'[^']*'|((?:#|\/\/).*$)/gm, '')
+            .replace(/^\s*\/\*\*?[^!][.\s\t\S\n\r]*?\*\//gm, '');
+      }
+      if (customConfiguration.Remove_empty_lines == true) {
+        formattedCode = formattedCode
+            .replace(/^\s*/gm, '');
+      }
+      if (customConfiguration.Space_inside_brackets == true) {
+        formattedCode = formattedCode
+            .replace(/(\() */g, '$1 ')
+            .replace(/ *(\))/g, ' $1');
+      }
+      if (customConfiguration.Space_inside_blocks == true) {
+        formattedCode = formattedCode
+            .replace(/(\{) */g, '$1 ')
+            .replace(/ *(\})/g, ' $1')
+            .split(/\r?\n/).map(indentSnippets).join('\n');
+      }
+      if (customConfiguration.Space_around_operators == true) {
+      // NEED HELP REGARDING THE REGEX
+      }
+    }
     return formattedCode
-        .replace(/(['"])([\s\S]*?)(\1)/g, (_exp, q, content) => ((contents.push(content), `${q}quotestring${q}`)))
         .replace(/(['"]).*?(\1)/g, (_exp, q, content) =>
           (((content = contents.shift()), q === '"' && content.match(/[\$\n']/g) ? `"${content}"` : `'${content}'`)));
   };
