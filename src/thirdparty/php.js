@@ -66,30 +66,44 @@ define(function(require, exports) {
     let formattedCode = code
         .replace(/(['"])([\s\S]*?)(\1)/g, (_exp, q, content) => ((contents.push(content), `${q}quotestring${q}`)));
 
-    if (customConfiguration != null) {
-      if (customConfiguration.Remove_all_comments == true) {
-        formattedCode = formattedCode
-            .replace(/'[^']*'|((?:#|\/\/).*$)/gm, '')
-            .replace(/^\s*\/\*\*?[^!][.\s\t\S\n\r]*?\*\//gm, '');
-      }
-      if (customConfiguration.Remove_empty_lines == true) {
-        formattedCode = formattedCode
-            .replace(/^\s*/gm, '');
-      }
-      if (customConfiguration.Space_inside_brackets == true) {
-        formattedCode = formattedCode
-            .replace(/(\() */g, '$1 ')
-            .replace(/ *(\))/g, ' $1');
-      }
-      if (customConfiguration.Space_inside_blocks == true) {
-        formattedCode = formattedCode
-            .replace(/(\{) */g, '$1 ')
-            .replace(/ *(\})/g, ' $1')
-            .split(/\r?\n/).map(indentSnippets).join('\n');
-      }
-      if (customConfiguration.Space_around_operators == true) {
+    // load default configuration
+    if (customConfiguration === null) {
+      customConfiguration = {
+        'Style': 'GNU',
+        'Indent': 'Space',
+        'Remove_all_comments': false,
+        'Remove_empty_lines': true,
+        'Make_long_opening_tag': true,
+        'Space_inside_brackets': true,
+        'Space_inside_blocks': true,
+        'Space_around_operators': true,
+      };
+    }
+    if (customConfiguration.Remove_all_comments == true) {
+      formattedCode = formattedCode
+          .replace(/'[^']*'|((?:#|\/\/).*$)/gm, '')
+          .replace(/^\s*\/\*\*?[^!][.\s\t\S\n\r]*?\*\//gm, '');
+    }
+    if (customConfiguration.Remove_empty_lines == true) {
+      formattedCode = formattedCode
+          .replace(/^\s*/gm, '');
+    }
+    if (customConfiguration.Space_inside_brackets == true) {
+      formattedCode = formattedCode
+          .replace(/(\() */g, '$1 ')
+          .replace(/ *(\))/g, ' $1');
+    }
+    if (customConfiguration.Space_around_operators == true) {
       // NEED HELP REGARDING THE REGEX
-      }
+      formattedCode = formattedCode
+          .replace(/((\*|\/|-|\+|&&|\|\||!)) */g, '$1 ')
+          .replace(/ *(\*|\/|-|\+|&&|\|\||!)/g, ' $1');
+    }
+    if (customConfiguration.Space_inside_blocks == true) {
+      formattedCode = formattedCode
+          .replace(/(\{) */g, '$1 ')
+          .replace(/ *(\})/g, ' $1')
+          .split(/\r?\n/).map(indentSnippets).join('\n');
     }
     return formattedCode
         .replace(/(['"]).*?(\1)/g, (_exp, q, content) =>
