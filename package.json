@@ -22,6 +22,7 @@
   "author": "nadchif",
   "license": "Apache-2.0",
   "devDependencies": {
+    "amd-loader": "0.0.8",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "bestzip": "^2.1.5",
@@ -29,7 +30,10 @@
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.19.1",
     "eslint-plugin-node": "^10.0.0",
-    "eslint-plugin-promise": "^4.2.1"
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-jasmine": "^4.1.1",
+    "jasmine": "^3.5.0"
   },
-  "dependencies": {}
+  "dependencies": {
+  }
 }
