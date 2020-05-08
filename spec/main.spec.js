@@ -1,10 +1,16 @@
+/**
+ *  File: main.spec.js
+ *  Author: Chif <nadchif@gmail.com>, Shankhanil <shankha.rik@gmail.com>
+ */
+
 require('amd-loader');
 // for tests that need RequireJS
 define(function(require, exports, module) {
   'use strict';
   const phpjs = require('../thirdparty/php');
   const format = require('../thirdparty/php').format;
-  describe('thirdparty/php.js', () => {
+
+  describe('thirdparty/php.js =>', () => {
     it('should expose a formatter method', () => {
       expect(phpjs.formatter).toBeDefined();
     });
@@ -19,7 +25,11 @@ define(function(require, exports, module) {
       'Space_inside_blocks': true,
       'Space_around_operators': true,
     };
+
     describe('Testing format functions using default configuration => ', () =>{
+        describe('Testing formatting for coding style =>', () =>{
+         // WRITE TESTS for formatting code a/c to GNU indentation style
+      });
       describe('Testing formatting for comments =>', () =>{
         it('Should keep the single line-comment untouched', ()=>{
           const code = '// a sample comment';
@@ -64,9 +74,24 @@ define(function(require, exports, module) {
           const finCode = 'some_code[ some_more_code ]';
           expect(format(initCode, customConfiguration)).toBe(finCode);
         });
-        it('Should put handle nested brackets ', ()=>{
+        it('Should handle nested brackets ', ()=>{
           const initCode = 'some_code[{some_more_code}(some_more_code)]';
           const finCode = 'some_code[ { some_more_code }( some_more_code ) ]';
+          expect(format(initCode, customConfiguration)).toBe(finCode);
+        });
+      });
+      describe('Testing formatting for space inside blocks =>', ()=>{
+        // WRTIE TESTS FOR SPACE INSIDE BLOCKS
+      });
+      describe('Testing formatting for space around operators =>', ()=>{
+        it('Should put space around arithmetic operators ', ()=>{
+          const initCode = 'x=a+b-c*d/e';
+          const finCode = 'x = a + b + c * d / e';
+          expect(format(initCode, customConfiguration)).toBe(finCode);
+        });
+        it('Should put space around logical operators ', ()=>{
+          const initCode = 'x=!a||b&&c';
+          const finCode = 'x = !a || b %% c';
           expect(format(initCode, customConfiguration)).toBe(finCode);
         });
       });
