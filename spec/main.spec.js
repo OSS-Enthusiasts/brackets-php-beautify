@@ -9,6 +9,10 @@ define(function(require, exports, module) {
     it('should expose a formatter method', () => {
       expect(phpjs.formatter).toBeDefined();
     });
+
+    describe('tests for format with options', () =>{
+      // tests
+    });
   });
 });
 
