@@ -7,7 +7,6 @@
  */
 
 define(function(require, exports) {
-
   const getCustomConfigFile = () => {
     const Dialogs = brackets.getModule('widgets/Dialogs');
     return new Promise((resolve, reject) => {
@@ -50,7 +49,7 @@ define(function(require, exports) {
 
   const format = (code, customConfiguration) => {
     // use custom configuration here. if there was none found, customConfiguration will still be null
-    console.log('Using the following configuration', customConfiguration);
+    // console.log('Using the following configuration', customConfiguration);
     // TODO: Implement using the configuration options from the customConfiguration Object when formatting code below
 
     let leval = 0;
@@ -94,10 +93,12 @@ define(function(require, exports) {
           .replace(/ *(\))/g, ' $1');
     }
     if (customConfiguration.Space_around_operators == true) {
-      // NEED HELP REGARDING THE REGEX
       formattedCode = formattedCode
-          .replace(/((\*|\/|-|\+|&&|\|\||!)) */g, '$1 ')
-          .replace(/ *(\*|\/|-|\+|&&|\|\||!)/g, ' $1');
+          .replace(/((\=|\*|\/|-|\+|&&|\|\|)) */g, '$1 ') // here '// test' to become '/ / test'
+          .replace(/ *(\=|\*|\/|-|\+|&&|\|\|)/g, ' $1')
+          .replace(/\/ \//g, '//') // here '/ / test' to become '// test' again
+          .replace(/\= \= \=/g, '===')
+          .replace(/\= \=/g, '==');
     }
     if (customConfiguration.Space_inside_blocks == true) {
       formattedCode = formattedCode
@@ -128,5 +129,5 @@ define(function(require, exports) {
       formatWithOptions(code, document);
     }
   };
-    exports.format = format;
+  exports.format = format;
 });
