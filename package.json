@@ -6,9 +6,11 @@
   "description": "Simple install-and-use code formatter (beautifier) PHP in Brackets. No extra configuration need, no PHP required",
   "main": "main.js",
   "scripts": {
-    "test": "./node_modules/.bin/eslint src/main.js",
+    "init": "jasmin init",
+    "test": "eslint src/main.js && jasmine --random=false",
     "zip": "npm run build && ./node_modules/.bin/bestzip brackets-php-beautify.zip lib/* thirdparty/* main.js requirejs-config.json package.json",
-    "build": "./node_modules/.bin/eslint ./src/* && ./node_modules/.bin/babel src -d .",
+    "build": "eslint ./src/* && babel src -d .",
+    "fix": "eslint --fix ./src/* && eslint --fix ./spec/*.js",
     "postinstall": "npm run build"
   },
   "keywords": [
