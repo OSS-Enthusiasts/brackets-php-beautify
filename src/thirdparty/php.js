@@ -7,9 +7,9 @@
  */
 
 define(function(require, exports) {
-  const Dialogs = brackets.getModule('widgets/Dialogs');
 
   const getCustomConfigFile = () => {
+    const Dialogs = brackets.getModule('widgets/Dialogs');
     return new Promise((resolve, reject) => {
       try {
         const ProjectManager = brackets.getModule('project/ProjectManager');
@@ -128,4 +128,5 @@ define(function(require, exports) {
       formatWithOptions(code, document);
     }
   };
+    exports.format = format;
 });
