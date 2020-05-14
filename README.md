@@ -43,4 +43,4 @@ This is an adaptation of [php-formatter](https://github.com/chuaple/php-formatte
 Apache-2.0
 
 ## Contributions
-Contributions and suggestions are very welcome and wanted. I try to respond to pull requests within 48 hours. For more information see [CONTRIBUTING.md](https://github.com/nadchif/brackets-php-beautify/blob/master/CONTRIBUTING.md).
+Contributions and suggestions are very welcome and wanted. We try to respond to pull requests within 48 hours. For more information see [CONTRIBUTING.md](https://github.com/nadchif/brackets-php-beautify/blob/master/CONTRIBUTING.md).
