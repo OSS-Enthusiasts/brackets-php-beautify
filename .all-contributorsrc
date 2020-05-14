@@ -15,6 +15,17 @@
         "test",
         "ideas"
       ]
+    },
+    {
+      "login": "nadchif",
+      "name": "Dan Chif",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/47924887?v=4",
+      "profile": "http://aboutchif.com",
+      "contributions": [
+        "code",
+        "test",
+        "maintenance"
+      ]
     }
   ],
   "contributorsPerLine": 7,
