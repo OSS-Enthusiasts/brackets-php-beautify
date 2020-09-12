@@ -1,6 +1,6 @@
 {
   "name": "brackets-php-beautify",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "title": "Brackets PHP-Beautify",
   "homepage": "https://github.com/nadchif/brackets-php-beautify",
   "description": "Simple install-and-use code formatter (beautifier) PHP in Brackets. No extra configuration need, no PHP required",
@@ -12,7 +12,6 @@
     "transpile": "./node_modules/.bin/babel src -d .",
     "build": "npm run-script lint && npm run-script transpile",
     "postinstall": "npm run-script build"
-
   },
   "keywords": [
     "brackets",
