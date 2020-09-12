@@ -8,8 +8,11 @@
   "scripts": {
     "test": "./node_modules/.bin/eslint src/main.js",
     "zip": "npm run-script build && ./node_modules/.bin/bestzip brackets-php-beautify.zip lib/* thirdparty/* main.js requirejs-config.json package.json",
-    "build": "./node_modules/.bin/eslint ./src/* && ./node_modules/.bin/babel src -d .",
+    "lint": "./node_modules/.bin/eslint ./src/* ",
+    "transpile": "./node_modules/.bin/babel src -d .",
+    "build": "npm run-script lint && npm run-script transpile",
     "postinstall": "npm run-script build"
+
   },
   "keywords": [
     "brackets",

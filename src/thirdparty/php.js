@@ -19,7 +19,9 @@ define(function(require, exports) {
     };
     const contents = [];
     return code
-        .replace(/(['"])([\s\S]*?)(\1)/g, (_exp, q, content) => ((contents.push(content), `${q}quotestring${q}`)))
+        .replace(/(['"])([\s\S]*?)(\1)/g, (_exp, q, content) => {
+          return ((contents.push(content), `${q}quotestring${q}`));
+        })
 
         .replace(/ ?([\+\-\*\/\.\?!><]?={1,3})(?!\>) ?/g, ' $1 ') // `=` [>1]
         .replace(/ ?([\&\|]{2}) ?/g, ' $1 ') // `&&` `||` [>1]
@@ -45,7 +47,7 @@ define(function(require, exports) {
         .replace(/(\n{2,})/g, '\n\n') // 去除多余空行
 
         .replace(/(['"]).*?(\1)/g, (_exp, q, content) =>
-          (((content = contents.shift()), q === '"' && content.match(/[\$\n']/g) ? `"${content}"` : `'${content}'`)));
+          (((content = contents.shift()), `${q}${content}${q}`)));
   };
 
   exports.formatter = (code) => {
