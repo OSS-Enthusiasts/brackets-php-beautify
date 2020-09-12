@@ -7,7 +7,7 @@
   "main": "main.js",
   "scripts": {
     "test": "./node_modules/.bin/eslint src/main.js",
-    "zip": "npm run-script build && ./node_modules/.bin/bestzip brackets-php-beautify.zip lib/* thirdparty/* main.js requirejs-config.json package.json",
+    "zip": "./node_modules/.bin/bestzip brackets-php-beautify.zip lib/* thirdparty/* main.js requirejs-config.json package.json",
     "lint": "./node_modules/.bin/eslint ./src/* ",
     "transpile": "./node_modules/.bin/babel src -d .",
     "build": "npm run-script lint && npm run-script transpile",
